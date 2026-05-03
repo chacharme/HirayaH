@@ -372,18 +372,18 @@
 
 
 <!-- Music bar -->
-<div class="music-bar">
+<div class="music-bar" onclick="startMusic()" style="cursor:pointer;">
   <span class="music-note">🎵</span>
   <div class="music-info">
-    <span class="music-title">The Nights — Avicii</span>
-    <span class="music-sub">speed up ver. ♪</span>
+    <span class="music-title" id="music-label">Tap to play music</span>
+    <span class="music-sub">Avicii x Coldplay ♪</span>
   </div>
 </div>
 
-<!-- Visible SoundCloud player -->
+<!-- SoundCloud player -->
 <div class="sc-wrapper">
-  <iframe
-    src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/user-723602684/avicii-the-nights-speed-up&color=%23c9a0dc&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false"
+  <iframe id="sc-player"
+    src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/cacao-shaker/avicii-the-nights-coldplay-a-sky-full-of-starssakum-mix-mashup&color=%23c9a0dc&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false"
     width="220" height="36"
     frameborder="no"
     allow="autoplay"
@@ -409,6 +409,20 @@
     height: 100%;
   }
 </style>
+
+<script src="https://w.soundcloud.com/player/api.js"></script>
+<script>
+  const iframe = document.getElementById("sc-player");
+  const widget = SC.Widget(iframe);
+  function startMusic() {
+    widget.play();
+    document.getElementById("music-label").textContent = "The Nights x A Sky Full of Stars";
+    document.removeEventListener("click", startMusic);
+    document.removeEventListener("touchstart", startMusic);
+  }
+  document.addEventListener("click", startMusic);
+  document.addEventListener("touchstart", startMusic);
+</script>
 
 <!-- Translate widget -->
 <div class="translate-bar">
